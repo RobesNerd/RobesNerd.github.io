@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calypso - The Five Spies of NeoVarion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+
+  nav {
+    transition: transform 0.3s ease;
+  }
+
+  nav.hide {
+    transform: translateY(-100%);
+  }
+  
+  :root { --black: #080608; --accent: #34d399; --accent-glow: rgba(52,211,153,0.3); --purple-glow: #a855f7; --grey-pale: #c5bfcc; --grey-light: #8a8090; --white: #f0ecf5; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'Crimson Text', serif; font-size: 18px; line-height: 1.7; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.4; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(8,6,8,0.95), transparent); border-bottom: 1px solid rgba(52,211,153,0.15); }
+  .nav-logo { font-family: 'Cinzel Decorative', serif; font-size: 13px; color: var(--accent-glow); letter-spacing: 3px; text-decoration: none; }
+  .nav-back { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--grey-pale); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--accent); }
+  .char-hero { min-height: 100vh; display: flex; align-items: flex-end; position: relative; overflow: hidden; padding: 120px 80px 80px; }
+  .char-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 70% 50%, rgba(52,211,153,0.08) 0%, transparent 65%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(10,50,30,0.2) 0%, transparent 60%), var(--black); }
+  .char-symbol { position: absolute; right: 8%; top: 50%; transform: translateY(-50%); font-size: 280px; opacity: 0.06; line-height: 1; animation: floatSymbol 6s ease-in-out infinite; }
+  @keyframes floatSymbol { 0%,100%{transform:translateY(-50%) rotate(-3deg);}50%{transform:translateY(-53%) rotate(3deg);} }
+  .char-number { font-family: 'Cinzel Decorative', serif; font-size: 120px; font-weight: 900; color: rgba(52,211,153,0.05); position: absolute; top: 120px; left: 80px; line-height: 1; }
+  .char-hero-content { position: relative; z-index: 2; max-width: 700px; }
+  .char-role-tag { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; opacity: 0; animation: fadeUp 1s ease 0.3s forwards; }
+  .char-role-tag::before { content:'';width:40px;height:1px;background:var(--accent); }
+  .char-name { font-family: 'Cinzel Decorative', serif; font-size: clamp(48px,7vw,96px); font-weight: 900; line-height: 1; color: var(--white); text-shadow: 0 0 60px var(--accent-glow); margin-bottom: 32px; opacity: 0; animation: fadeUp 1s ease 0.5s forwards; }
+  .char-tagline { font-size: 22px; font-style: italic; color: var(--grey-pale); max-width: 500px; opacity: 0; animation: fadeUp 1s ease 0.7s forwards; }
+  .hero-line { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); }
+  .char-content { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+  .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 80px; }
+  .content-block h2 { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .content-block p { color: var(--grey-pale); font-size: 18px; line-height: 1.9; margin-bottom: 16px; }
+  .divider { width:100%;height:1px;background:linear-gradient(to right,var(--accent),transparent);margin:60px 0;opacity:0.3; }
+  .section-label { font-family:'Cinzel',serif;font-size:14px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:32px;display:block; }
+  .stats-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:60px; }
+  .stat-box { padding:28px 20px;border:1px solid rgba(52,211,153,0.2);background:rgba(13,10,15,0.8);text-align:center;transition:all 0.3s; }
+  .stat-box:hover { border-color:rgba(52,211,153,0.5);transform:translateY(-4px); }
+  .stat-value { font-family:'Cinzel Decorative',serif;font-size:36px;color:var(--accent);display:block;margin-bottom:8px;text-shadow:0 0 20px var(--accent-glow); }
+  .stat-name { font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--grey-light); }
+  .bar-row { display:flex;align-items:center;gap:20px;margin-bottom:20px; }
+  .bar-label { font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--grey-pale);width:120px;flex-shrink:0; }
+  .bar-track { flex:1;height:2px;background:rgba(255,255,255,0.08); }
+  .bar-fill { height:100%;background:linear-gradient(to right,#064e3b,var(--accent));box-shadow:0 0 8px var(--accent-glow);animation:grow 1.5s ease forwards;transform-origin:left;transform:scaleX(0); }
+  @keyframes grow { to { transform:scaleX(1); } }
+  .bar-num { font-family:'Cinzel',serif;font-size:12px;color:var(--accent);width:32px;text-align:right; }
+  .timeline { display:flex;flex-direction:column; }
+  .tl-item { display:grid;grid-template-columns:20px 1fr;gap:24px;padding-bottom:36px; }
+  .tl-item:last-child { padding-bottom:0; }
+  .tl-left { display:flex;flex-direction:column;align-items:center; }
+  .tl-dot { width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent-glow);flex-shrink:0;margin-top:6px; }
+  .tl-line { width:1px;flex:1;background:linear-gradient(to bottom,var(--accent),rgba(52,211,153,0.1));margin-top:6px; }
+  .tl-item:last-child .tl-line { display:none; }
+  .tl-content h3 { font-family:'Cinzel',serif;font-size:14px;color:#6ee7b7;margin-bottom:6px;letter-spacing:1px; }
+  .tl-content p { color:var(--grey-pale);font-size:16px;line-height:1.7; }
+  .char-quote { padding:60px 40px;text-align:center;background:linear-gradient(135deg,rgba(13,10,15,0.9),rgba(5,30,20,0.4));border:1px solid rgba(52,211,153,0.15);margin:60px 0;position:relative; }
+  .char-quote::before { content:'"';font-family:'Cinzel Decorative',serif;font-size:100px;color:rgba(52,211,153,0.1);position:absolute;top:10px;left:30px;line-height:1; }
+  .char-quote blockquote { font-size:clamp(20px,2.5vw,28px);font-style:italic;color:var(--grey-pale);max-width:600px;margin:0 auto 16px;line-height:1.6;position:relative;z-index:1; }
+  .char-quote cite { font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent); }
+  .veyln-box { padding:40px;border:1px solid rgba(52,211,153,0.2);background:rgba(13,10,15,0.9);position:relative;margin-bottom:60px; }
+  .veyln-box::before { content:'';position:absolute;top:0;left:0;width:60px;height:2px;background:var(--accent); }
+  .veyln-box h3 { font-family:'Cinzel',serif;font-size:16px;color:#6ee7b7;margin-bottom:16px;letter-spacing:2px; }
+  .veyln-box p { color:var(--grey-pale);font-size:17px;line-height:1.8;margin-bottom:12px; }
+  .char-nav { padding:60px 40px;border-top:1px solid rgba(52,211,153,0.15);display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto; }
+  .char-nav a { font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--grey-pale);text-decoration:none;transition:color 0.3s; }
+  .char-nav a:hover { color:var(--accent); }
+  .fade-in { opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease; }
+  .fade-in.visible { opacity:1;transform:translateY(0); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+  @media(max-width:768px){.char-hero{padding:100px 24px 60px;}.content-grid{grid-template-columns:1fr;gap:40px;}.stats-grid{grid-template-columns:repeat(2,1fr);}.char-symbol{font-size:160px;}nav{padding:16px 20px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">The Five Spies</a>
+  <a href="index.html#characters" class="nav-back">← All Characters</a>
+</nav>
+<div class="char-hero">
+  <div class="char-hero-bg"></div>
+  <div class="char-symbol">🌿</div>
+  <div class="char-number">04</div>
+  <div class="char-hero-content">
+    <div class="char-role-tag">Elf, Scout of Veyln</div>
+    <h1 class="char-name">Calypso</h1>
+    <p class="char-tagline">Exiled by her own people. She joined the mission because she had nowhere else to go. She stayed because she finally found somewhere to belong.</p>
+  </div>
+  <div class="hero-line"></div>
+</div>
+<div class="char-content">
+  <div class="content-grid fade-in">
+    <div class="content-block">
+      <h2>The Elf</h2>
+      <p>Calypso can see in total darkness and move almost completely unseen. In the dungeon of Kraznir, those abilities are the difference between the mission succeeding and the whole team dying in the dark. She is not the loudest spy in the group. She is often the most essential.</p>
+      <p>She also has an instinct for reading people and situations that the others lack. She notices things before they become problems. She just rarely says anything until it matters.</p>
+    </div>
+    <div class="content-block">
+      <h2>The Exile</h2>
+      <p>She comes from Veyln, a hidden elven city built deep underground, lit by glowing crystals instead of sunlight. Her people are secretive and isolationist. They do not leave, and they do not welcome outsiders.</p>
+      <p>Calypso was exiled. She rarely speaks about why. What she will say is that the king of Slinsil offered her a mission and, with it, a place to belong. She took it without hesitation. That was the first time in a long time that anyone had asked her to be part of something.</p>
+    </div>
+  </div>
+
+  <div class="veyln-box fade-in">
+    <h3>Veyln, The Underground City</h3>
+    <p>Built deep beneath the surface of NeoVarion, Veyln is a city of silence and crystal light. Its people have lived underground for so long that they see in the dark as naturally as breathing. They speak in low voices and keep their world hidden from everyone above.</p>
+    <p>Calypso carries Veyln with her everywhere, in the way she moves, the way she watches, the way she waits before speaking. But she has no intention of going back.</p>
+  </div>
+
+  <div class="char-quote fade-in">
+    <blockquote>I do not need many words. I just need to be in the right place at the right moment.</blockquote>
+    <cite>Calypso</cite>
+  </div>
+
+  <div class="fade-in">
+    <span class="section-label">At a Glance</span>
+    <div class="stats-grid">
+      <div class="stat-box"><span class="stat-value">04</span><span class="stat-name">Spy Number</span></div>
+      <div class="stat-box"><span class="stat-value">∞</span><span class="stat-name">Night Vision</span></div>
+      <div class="stat-box"><span class="stat-value">95%</span><span class="stat-name">Invisibility</span></div>
+      <div class="stat-box"><span class="stat-value">1st</span><span class="stat-name">To notice danger</span></div>
+    </div>
+  </div>
+
+  <div class="fade-in">
+    <span class="section-label">Combat Profile</span>
+    <div class="bar-row"><span class="bar-label">Stealth</span><div class="bar-track"><div class="bar-fill" style="width:99%"></div></div><span class="bar-num">99</span></div>
+    <div class="bar-row"><span class="bar-label">Night Vision</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-num">100</span></div>
+    <div class="bar-row"><span class="bar-label">Perception</span><div class="bar-track"><div class="bar-fill" style="width:96%"></div></div><span class="bar-num">96</span></div>
+    <div class="bar-row"><span class="bar-label">Combat</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><span class="bar-num">72</span></div>
+    <div class="bar-row"><span class="bar-label">Wisdom</span><div class="bar-track"><div class="bar-fill" style="width:93%"></div></div><span class="bar-num">93</span></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="fade-in">
+    <span class="section-label">Timeline</span>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><h3>Life in Veyln</h3><p>Grows up in the underground city, surrounded by crystal light and silence. Learns to move without sound and see without light. Feels, quietly, that she does not belong there.</p></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><h3>The Exile</h3><p>Exiled from Veyln. She does not speak much about what happened. She carries it with her in the way she holds herself, careful and self-contained, as if trying to take up as little space as possible.</p></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><h3>The Mission</h3><p>Joins the five spies. Her abilities in the dark make the dungeon escape possible. She watches the group carefully, says very little, and understands everything.</p></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot"></div></div><div class="tl-content"><h3>After NeoVarion</h3><p>Goes to the River Glin to collect its rare stones. No one knows exactly why. Maybe she just needed somewhere quiet. Maybe she found something there that felt like home.</p></div></div>
+    </div>
+  </div>
+</div>
+<div class="char-nav">
+  <a href="sarason.html">← Sarason</a>
+  <a href="littlejohn.html">Littlejohn →</a>
+</div>
+<script>
+  const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  let lastScroll = 0;
+  const nav = document.querySelector("nav");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll <= 0) {
+      nav.classList.remove("hide");
+      return;
+    }
+
+    if (currentScroll > lastScroll) {
+      // scroll pra baixo → esconde
+      nav.classList.add("hide");
+    } else {
+      // scroll pra cima → mostra
+      nav.classList.remove("hide");
+    }
+
+    lastScroll = currentScroll;
+  });
+  
+</script>
+</body>
+</html>

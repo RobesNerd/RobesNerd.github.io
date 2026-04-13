@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Touchfire - The Five Spies of NeoVarion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+
+  nav {
+    transition: transform 0.3s ease;
+  }
+
+  nav.hide {
+    transform: translateY(-100%);
+  }
+  
+  :root {
+    --black: #080608;
+    --deep: #0d0a0f;
+    --accent: #f97316;
+    --accent-glow: rgba(249,115,22,0.35);
+    --purple-glow: #a855f7;
+    --grey-pale: #c5bfcc;
+    --grey-light: #8a8090;
+    --grey-mid: #3a3540;
+    --white: #f0ecf5;
+    --purple-light: #d4a8ff;
+    --purple-mid: #3d1a6e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(8,6,8,0.95), transparent);
+    border-bottom: 1px solid rgba(249,115,22,0.15);
+  }
+  .nav-logo { font-family: 'Cinzel Decorative', serif; font-size: 13px; color: var(--accent-glow); letter-spacing: 3px; text-decoration: none; }
+  .nav-back { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--grey-pale); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--accent); }
+
+  .char-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 80px 80px;
+  }
+  .char-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 70% at 70% 50%, rgba(249,115,22,0.12) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(120,40,10,0.2) 0%, transparent 60%),
+      var(--black);
+  }
+  .char-symbol { position: absolute; right: 8%; top: 50%; transform: translateY(-50%); font-size: 280px; opacity: 0.06; line-height: 1; animation: floatSymbol 6s ease-in-out infinite; }
+  @keyframes floatSymbol { 0%, 100% { transform: translateY(-50%) rotate(-3deg); } 50% { transform: translateY(-53%) rotate(3deg); } }
+  .char-number { font-family: 'Cinzel Decorative', serif; font-size: 120px; font-weight: 900; color: rgba(249,115,22,0.06); position: absolute; top: 120px; left: 80px; line-height: 1; }
+  .char-hero-content { position: relative; z-index: 2; max-width: 700px; }
+  .char-role-tag { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; opacity: 0; animation: fadeUp 1s ease 0.3s forwards; }
+  .char-role-tag::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+  .char-name { font-family: 'Cinzel Decorative', serif; font-size: clamp(48px, 7vw, 96px); font-weight: 900; line-height: 1; color: var(--white); text-shadow: 0 0 60px var(--accent-glow); margin-bottom: 32px; opacity: 0; animation: fadeUp 1s ease 0.5s forwards; }
+  .char-tagline { font-size: 22px; font-style: italic; color: var(--grey-pale); max-width: 500px; opacity: 0; animation: fadeUp 1s ease 0.7s forwards; }
+  .hero-line { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--accent), transparent); }
+
+  .char-content { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+  .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 80px; }
+  .content-block h2 { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .content-block p { color: var(--grey-pale); font-size: 18px; line-height: 1.9; margin-bottom: 16px; }
+  .divider { width: 100%; height: 1px; background: linear-gradient(to right, var(--accent), transparent); margin: 60px 0; opacity: 0.3; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 60px; }
+  .stat-box { padding: 28px 20px; border: 1px solid rgba(249,115,22,0.2); background: rgba(13,10,15,0.8); text-align: center; transition: all 0.3s; }
+  .stat-box:hover { border-color: rgba(249,115,22,0.5); transform: translateY(-4px); }
+  .stat-value { font-family: 'Cinzel Decorative', serif; font-size: 36px; color: var(--accent); display: block; margin-bottom: 8px; text-shadow: 0 0 20px var(--accent-glow); }
+  .stat-name { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--grey-light); }
+
+  .section-label { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; display: block; }
+
+  .bar-row { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+  .bar-label { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--grey-pale); width: 120px; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 2px; background: rgba(255,255,255,0.08); }
+  .bar-fill { height: 100%; background: linear-gradient(to right, #7c2d12, var(--accent)); box-shadow: 0 0 8px var(--accent-glow); animation: grow 1.5s ease forwards; transform-origin: left; transform: scaleX(0); }
+  @keyframes grow { to { transform: scaleX(1); } }
+  .bar-num { font-family: 'Cinzel', serif; font-size: 12px; color: var(--accent); width: 32px; text-align: right; }
+
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: grid; grid-template-columns: 20px 1fr; gap: 24px; padding-bottom: 36px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-left { display: flex; flex-direction: column; align-items: center; }
+  .tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); flex-shrink: 0; margin-top: 6px; }
+  .tl-line { width: 1px; flex: 1; background: linear-gradient(to bottom, var(--accent), rgba(249,115,22,0.1)); margin-top: 6px; }
+  .tl-item:last-child .tl-line { display: none; }
+  .tl-content h3 { font-family: 'Cinzel', serif; font-size: 14px; color: #fdba74; margin-bottom: 6px; letter-spacing: 1px; }
+  .tl-content p { color: var(--grey-pale); font-size: 16px; line-height: 1.7; }
+
+  .char-quote { padding: 60px 40px; text-align: center; background: linear-gradient(135deg, rgba(13,10,15,0.9), rgba(60,20,5,0.3)); border: 1px solid rgba(249,115,22,0.15); margin: 60px 0; position: relative; }
+  .char-quote::before { content: '"'; font-family: 'Cinzel Decorative', serif; font-size: 100px; color: rgba(249,115,22,0.12); position: absolute; top: 10px; left: 30px; line-height: 1; }
+  .char-quote blockquote { font-size: clamp(20px, 2.5vw, 28px); font-style: italic; color: var(--grey-pale); max-width: 600px; margin: 0 auto 16px; line-height: 1.6; position: relative; z-index: 1; }
+  .char-quote cite { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); }
+
+  .brother-box { padding: 40px; border: 1px solid rgba(249,115,22,0.2); background: rgba(13,10,15,0.9); position: relative; margin-bottom: 60px; }
+  .brother-box::before { content: ''; position: absolute; top: 0; left: 0; width: 60px; height: 2px; background: var(--accent); }
+  .brother-box h3 { font-family: 'Cinzel', serif; font-size: 16px; color: #fdba74; margin-bottom: 16px; letter-spacing: 2px; }
+  .brother-box p { color: var(--grey-pale); font-size: 17px; line-height: 1.8; margin-bottom: 12px; }
+
+  .char-nav { padding: 60px 40px; border-top: 1px solid rgba(249,115,22,0.15); display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; }
+  .char-nav a { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--grey-pale); text-decoration: none; transition: color 0.3s; }
+  .char-nav a:hover { color: var(--accent); }
+
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 768px) { .char-hero { padding: 100px 24px 60px; } .content-grid { grid-template-columns: 1fr; gap: 40px; } .stats-grid { grid-template-columns: repeat(2,1fr); } .char-symbol { font-size: 160px; } nav { padding: 16px 20px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">The Five Spies</a>
+  <a href="index.html#characters" class="nav-back">← All Characters</a>
+</nav>
+
+<div class="char-hero">
+  <div class="char-hero-bg"></div>
+  <div class="char-symbol">🔥</div>
+  <div class="char-number">02</div>
+  <div class="char-hero-content">
+    <div class="char-role-tag">Wizard, Greatest of NeoVarion</div>
+    <h1 class="char-name">Touchfire</h1>
+    <p class="char-tagline">He dreamed the same dream as his brother. He just chose a different path to reach it, and that difference destroyed everything.</p>
+  </div>
+  <div class="hero-line"></div>
+</div>
+
+<div class="char-content">
+
+  <div class="content-grid fade-in">
+    <div class="content-block">
+      <h2>The Wizard</h2>
+      <p>Touchfire is one of the most powerful wizards on NeoVarion. He can create and control fire with precision, turn enemies to stone, and after defeating his brother, he became the single greatest wielder of magic the world has ever seen.</p>
+      <p>His spells, before absorbing Nehemath's power, lasted only five minutes. That limitation forced him to be creative and strategic in every fight. It made him dangerous in a way raw power alone never could.</p>
+    </div>
+    <div class="content-block">
+      <h2>The Man Behind the Flame</h2>
+      <p>Beneath the power is a person carrying a grief most people will never understand. He and Nehemath grew up with the same dream. They trained together, pushed each other, and were close in a way brothers often are.</p>
+      <p>When the Shadowfang snake bit Nehemath and changed him, Touchfire lost his brother years before he ever had to fight him. The fight in the Forest of Haag was not a victory. It was the end of something that had been dying for a long time.</p>
+    </div>
+  </div>
+
+  <div class="char-quote fade-in">
+    <blockquote>He was my brother before he was my enemy. I never forgot that. Not even at the end.</blockquote>
+    <cite>Touchfire</cite>
+  </div>
+
+  <div class="brother-box fade-in">
+    <h3>Touchfire and Nehemath, The Brothers</h3>
+    <p>They grew up together with one shared dream: to become the greatest wizard on NeoVarion. They were inseparable, competitive, and genuinely close. Then a Shadowfang snake bit Nehemath during an expedition, slowly corrupting his heart and turning ambition into obsession.</p>
+    <p>The two brothers tried to stay together for years after the bite. But Nehemath grew colder, more controlling, more cruel. Eventually they made a vow to destroy each other, not entirely out of hate, but out of the grief of losing what they once had.</p>
+    <p>When Touchfire defeats Nehemath in the Forest of Haag and absorbs his powers, the others cheer. Touchfire stands still for a long moment. He is the greatest wizard on NeoVarion now. It feels like nothing.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="fade-in">
+    <span class="section-label">At a Glance</span>
+    <div class="stats-grid">
+      <div class="stat-box"><span class="stat-value">02</span><span class="stat-name">Spy Number</span></div>
+      <div class="stat-box"><span class="stat-value">2x</span><span class="stat-name">Power After Haag</span></div>
+      <div class="stat-box"><span class="stat-value">5m</span><span class="stat-name">Original Spell Duration</span></div>
+      <div class="stat-box"><span class="stat-value">∞</span><span class="stat-name">After the Forest</span></div>
+    </div>
+  </div>
+
+  <div class="fade-in">
+    <span class="section-label">Combat Profile</span>
+    <div class="bar-row"><span class="bar-label">Fire Control</span><div class="bar-track"><div class="bar-fill" style="width:99%"></div></div><span class="bar-num">99</span></div>
+    <div class="bar-row"><span class="bar-label">Magic Power</span><div class="bar-track"><div class="bar-fill" style="width:95%"></div></div><span class="bar-num">95</span></div>
+    <div class="bar-row"><span class="bar-label">Strategy</span><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div><span class="bar-num">78</span></div>
+    <div class="bar-row"><span class="bar-label">Emotional Strength</span><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div><span class="bar-num">70</span></div>
+    <div class="bar-row"><span class="bar-label">Loyalty</span><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div><span class="bar-num">94</span></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="fade-in">
+    <span class="section-label">Timeline</span>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content"><h3>Childhood</h3><p>Grows up alongside his brother Nehemath, sharing the dream of becoming the greatest wizard on NeoVarion. They train together, push each other, and are genuinely close.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content"><h3>The Shadowfang Bite</h3><p>During an early expedition, a Shadowfang snake bites Nehemath. The change is slow but permanent. Touchfire watches his brother drift into darkness year by year, powerless to stop it.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content"><h3>The Vow</h3><p>The two brothers, now enemies, vow to destroy each other. It is the most painful thing either of them has ever done.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content"><h3>The Mission</h3><p>Joins the five spies. Proves essential in nearly every battle, from the spider ambush to the Margatroth in the desert.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content"><h3>The Forest of Haag</h3><p>Fights and defeats Nehemath. Absorbs his powers. Becomes the greatest wizard on NeoVarion. Stands very still while everyone else celebrates.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-dot"></div></div>
+        <div class="tl-content"><h3>After NeoVarion</h3><p>Moves to the Forest of Haag to live among the Dwellers. Marries a magician. They have a son. He names him Max.</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="char-nav">
+  <a href="max.html">← Max Strange</a>
+  <a href="sarason.html">Sarason →</a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  let lastScroll = 0;
+  const nav = document.querySelector("nav");
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll <= 0) {
+      nav.classList.remove("hide");
+      return;
+    }
+
+    if (currentScroll > lastScroll) {
+      // scroll pra baixo → esconde
+      nav.classList.add("hide");
+    } else {
+      // scroll pra cima → mostra
+      nav.classList.remove("hide");
+    }
+
+    lastScroll = currentScroll;
+  });
+  
+</script>
+</body>
+</html>
