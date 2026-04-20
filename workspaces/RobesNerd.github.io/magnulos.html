@@ -73,8 +73,8 @@
 </head>
 <body>
 <nav>
-  <a href="/index.html" class="nav-logo">The Five Spies</a>
-  <a href="/index.html#characters" class="nav-back">← All Characters</a>
+  <a href="/fivespies.html" class="nav-logo">The Five Spies</a>
+  <a href="/fivespies.html#characters" class="nav-back">← All Characters</a>
 </nav>
 <div class="char-hero">
   <div class="char-hero-bg"></div>
@@ -134,7 +134,7 @@
 </div>
 <div class="char-nav">
   <a href="/workspaces/RobesNerd.github.io/littlejohn.html">← Littlejohn</a>
-  <a href="/index.html">← Back to Home</a>
+  <a href="/fivespies.html">← Back to Home</a>
 </div>
 <script>
   const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });
@@ -152,10 +152,10 @@
     }
 
     if (currentScroll > lastScroll) {
-      // scroll pra baixo → esconde
+      
       nav.classList.add("hide");
     } else {
-      // scroll pra cima → mostra
+      
       nav.classList.remove("hide");
     }
 
