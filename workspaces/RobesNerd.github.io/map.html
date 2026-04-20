@@ -37,7 +37,7 @@
   .page-header h1 { font-family: 'Cinzel Decorative', serif; font-size: clamp(36px, 6vw, 72px); font-weight: 900; color: var(--white); text-shadow: 0 0 40px rgba(168,85,247,0.4); margin-bottom: 16px; }
   .page-header p { font-size: 19px; font-style: italic; color: var(--grey-pale); max-width: 500px; margin: 0 auto; }
 
-  /* MAP CONTAINER */
+  
   .map-wrapper {
     max-width: 1300px;
     margin: 0 auto;
@@ -65,7 +65,7 @@
       linear-gradient(180deg, #0a0614 0%, #080410 50%, #0c0818 100%);
   }
 
-  /* SVG MAP */
+  
   .map-svg {
     position: absolute;
     inset: 0;
@@ -73,7 +73,7 @@
     height: 100%;
   }
 
-  /* LOCATION PINS */
+  
   .location-pin {
     cursor: pointer;
     transition: all 0.3s;
@@ -82,7 +82,6 @@
   .location-pin:hover .pin-glow { opacity: 1; }
   .location-pin.active .pin-circle {transform: scale(1.2);}
   
-  /* ROUTE PATH */
   .route-path {
     stroke-dasharray: 8 6;
     animation: dashMove 20s linear infinite;
@@ -122,7 +121,7 @@
   .info-event-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--purple-glow); margin-bottom: 6px; }
   .info-event-text { color: var(--grey-pale); font-size: 15px; font-style: italic; line-height: 1.6; }
 
-  /* LEGEND */
+  
   .map-legend {
     max-width: 1300px;
     margin: 0 auto;
@@ -141,7 +140,7 @@
   .legend-line::after { content: ''; position: absolute; right: -4px; top: -3px; border: 4px solid transparent; border-left-color: rgba(168,85,247,0.5); }
   .legend-text { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--grey-pale); }
 
-  /* LOCATION LIST */
+
   .location-list {
     max-width: 1300px;
     margin: 0 auto;
@@ -264,13 +263,13 @@
         <text y="24" text-anchor="middle" fill="#c5bfcc" font-family="Cinzel, serif" font-size="9" letter-spacing="1">RIVER GLIN</text>
       </g>
 
-      <g class="location-pin" data-location="desert" onclick="selectLocation('desert')" transform="translate(530,400)">
+      <g class="location-pin" data-location="desert" onclick="selectLocation('desert')" transform="translate(370,490)">
         <circle r="18" fill="rgba(251,191,36,0.08)" class="pin-glow" opacity="0"/>
         <circle r="8" fill="#fbbf24" filter="url(#glow-purple)" class="pin-circle"/>
         <text y="24" text-anchor="middle" fill="#c5bfcc" font-family="Cinzel, serif" font-size="9" letter-spacing="1">STONY DESERT</text>
       </g>
 
-      <g class="location-pin" data-location="forest" onclick="selectLocation('forest')" transform="translate(370,490)">
+      <g class="location-pin" data-location="forest" onclick="selectLocation('forest')" transform="translate(530,400)">
         <circle r="18" fill="rgba(52,211,153,0.08)" class="pin-glow" opacity="0"/>
         <circle r="8" fill="#34d399" filter="url(#glow-purple)" class="pin-circle"/>
         <text y="24" text-anchor="middle" fill="#c5bfcc" font-family="Cinzel, serif" font-size="9" letter-spacing="1">FOREST OF HAAG</text>
@@ -298,8 +297,8 @@
       <text x="155" y="163" text-anchor="middle" fill="rgba(239,68,68,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 1</text>
       <text x="240" y="253" text-anchor="middle" fill="rgba(168,85,247,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 2</text>
       <text x="385" y="323" text-anchor="middle" fill="rgba(59,130,246,0.6)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 3</text>
-      <text x="530" y="383" text-anchor="middle" fill="rgba(251,191,36,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 4</text>
-      <text x="370" y="473" text-anchor="middle" fill="rgba(52,211,153,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 5</text>
+      <text x="530" y="383" text-anchor="middle" fill="rgba(251,191,36,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 5</text>
+      <text x="370" y="473" text-anchor="middle" fill="rgba(52,211,153,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 4</text>
     </svg>
   </div>
 
