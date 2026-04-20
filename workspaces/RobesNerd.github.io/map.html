@@ -6,15 +6,8 @@
 <title>Map of NeoVarion - The Five Spies</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-
-  nav {
-    transition: transform 0.3s ease;
-  }
-
-  nav.hide {
-    transform: translateY(-100%);
-  }
-  
+  nav { transition: transform 0.3s ease; }
+  nav.hide { transform: translateY(-100%); }
   :root {
     --black: #080608; --deep: #0d0a0f;
     --purple-dark: #1a0a2e; --purple-mid: #3d1a6e;
@@ -37,71 +30,23 @@
   .page-header h1 { font-family: 'Cinzel Decorative', serif; font-size: clamp(36px, 6vw, 72px); font-weight: 900; color: var(--white); text-shadow: 0 0 40px rgba(168,85,247,0.4); margin-bottom: 16px; }
   .page-header p { font-size: 19px; font-style: italic; color: var(--grey-pale); max-width: 500px; margin: 0 auto; }
 
-  
-  .map-wrapper {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 40px 80px;
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 40px;
-    align-items: start;
-  }
+  .map-wrapper { max-width: 1300px; margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: 1fr 380px; gap: 40px; align-items: start; }
 
-  .map-container {
-    position: relative;
-    border: 1px solid rgba(168,85,247,0.2);
-    background: #06040a;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-  }
+  .map-container { position: relative; border: 1px solid rgba(168,85,247,0.2); background: #06040a; overflow: hidden; aspect-ratio: 4/3; }
+  .map-container::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(20,8,40,0.8) 0%, transparent 70%), linear-gradient(180deg, #0a0614 0%, #080410 50%, #0c0818 100%); }
 
-  .map-container::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(20,8,40,0.8) 0%, transparent 70%),
-      linear-gradient(180deg, #0a0614 0%, #080410 50%, #0c0818 100%);
-  }
+  .map-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-  
-  .map-svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  
-  .location-pin {
-    cursor: pointer;
-    transition: all 0.3s;
-  }
+  .location-pin { cursor: pointer; transition: all 0.3s; }
   .location-pin:hover .pin-circle { r: 10; }
   .location-pin:hover .pin-glow { opacity: 1; }
-  .location-pin.active .pin-circle {transform: scale(1.2);}
-  
-  .route-path {
-    stroke-dasharray: 8 6;
-    animation: dashMove 20s linear infinite;
-  }
+  .location-pin.active .pin-circle { transform: scale(1.2); }
+
+  .route-path { stroke-dasharray: 8 6; animation: dashMove 20s linear infinite; }
   @keyframes dashMove { to { stroke-dashoffset: -200; } }
 
-  /* INFO PANEL */
-  .info-panel {
-    position: sticky;
-    top: 100px;
-  }
-
-  .info-card {
-    border: 1px solid rgba(168,85,247,0.2);
-    background: rgba(13,10,15,0.95);
-    padding: 40px;
-    position: relative;
-    min-height: 400px;
-    transition: all 0.4s;
-  }
+  .info-panel { position: sticky; top: 100px; }
+  .info-card { border: 1px solid rgba(168,85,247,0.2); background: rgba(13,10,15,0.95); padding: 40px; position: relative; min-height: 400px; transition: all 0.4s; }
   .info-card::before { content: ''; position: absolute; top: 0; left: 0; width: 60px; height: 2px; background: var(--purple-glow); }
 
   .info-default { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; }
@@ -121,16 +66,7 @@
   .info-event-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--purple-glow); margin-bottom: 6px; }
   .info-event-text { color: var(--grey-pale); font-size: 15px; font-style: italic; line-height: 1.6; }
 
-  
-  .map-legend {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 40px 40px;
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+  .map-legend { max-width: 1300px; margin: 0 auto; padding: 0 40px 40px; display: flex; gap: 32px; flex-wrap: wrap; align-items: center; }
   .legend-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--grey-light); margin-right: 8px; }
   .legend-item { display: flex; align-items: center; gap: 8px; }
   .legend-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--purple-glow); box-shadow: 0 0 6px var(--purple-glow); }
@@ -140,13 +76,7 @@
   .legend-line::after { content: ''; position: absolute; right: -4px; top: -3px; border: 4px solid transparent; border-left-color: rgba(168,85,247,0.5); }
   .legend-text { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--grey-pale); }
 
-
-  .location-list {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 60px 40px;
-    border-top: 1px solid rgba(168,85,247,0.1);
-  }
+  .location-list { max-width: 1300px; margin: 0 auto; padding: 60px 40px; border-top: 1px solid rgba(168,85,247,0.1); }
   .location-list h2 { font-family: 'Cinzel Decorative', serif; font-size: 28px; color: var(--white); margin-bottom: 8px; }
   .list-subtitle { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--purple-glow); margin-bottom: 40px; display: block; }
   .list-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -171,8 +101,8 @@
 <body>
 
 <nav>
-  <a href="/fivespies.html" class="nav-logo">The Five Spies</a>
-  <a href="/fivespies.html#locations" class="nav-back">← Back to Home</a>
+  <a href="index.html" class="nav-logo">The Five Spies</a>
+  <a href="index.html#locations" class="nav-back">← Back to Home</a>
 </nav>
 
 <div class="page-header">
@@ -193,13 +123,9 @@
           <feGaussianBlur stdDeviation="5" result="blur"/>
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-        <radialGradient id="terrainGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#1a0a2e" stop-opacity="0.6"/>
-          <stop offset="100%" stop-color="#06040a" stop-opacity="0"/>
-        </radialGradient>
       </defs>
 
-
+      <!-- Mountains terrain -->
       <g opacity="0.25" fill="none" stroke="#4a3060" stroke-width="1">
         <polygon points="180,280 210,230 240,280" fill="#1a0f2e"/>
         <polygon points="210,280 245,220 280,280" fill="#1a0f2e"/>
@@ -207,37 +133,53 @@
         <polygon points="195,280 225,240 255,280" fill="#241440" opacity="0.5"/>
       </g>
 
+      <!-- River -->
       <path d="M 370,260 Q 390,280 380,310 Q 370,340 390,370 Q 410,400 400,430" fill="none" stroke="#1e3a5f" stroke-width="14" opacity="0.6"/>
       <path d="M 370,260 Q 390,280 380,310 Q 370,340 390,370 Q 410,400 400,430" fill="none" stroke="#2563eb" stroke-width="3" opacity="0.3"/>
 
-      <ellipse cx="530" cy="390" rx="110" ry="70" fill="#1a1005" opacity="0.5"/>
-      <ellipse cx="530" cy="390" rx="80" ry="50" fill="#241808" opacity="0.4"/>
+      <!-- DESERT terrain - Day 4, bottom center area -->
+      <ellipse cx="330" cy="490" rx="90" ry="55" fill="#1a1005" opacity="0.5"/>
+      <ellipse cx="330" cy="490" rx="65" ry="38" fill="#241808" opacity="0.4"/>
 
-      <ellipse cx="360" cy="490" rx="90" ry="55" fill="#051a0a" opacity="0.6"/>
-      <circle cx="330" cy="475" r="25" fill="#062010" opacity="0.5"/>
-      <circle cx="370" cy="480" r="30" fill="#062010" opacity="0.5"/>
-      <circle cx="400" cy="470" r="22" fill="#062010" opacity="0.5"/>
+      <!-- FOREST terrain - Day 5, closer to Slinsil on right side -->
+      <ellipse cx="540" cy="380" rx="110" ry="70" fill="#051a0a" opacity="0.6"/>
+      <circle cx="510" cy="365" r="25" fill="#062010" opacity="0.5"/>
+      <circle cx="545" cy="370" r="30" fill="#062010" opacity="0.5"/>
+      <circle cx="575" cy="360" r="22" fill="#062010" opacity="0.5"/>
 
-
+      <!-- Kraznir castle outline -->
       <rect x="120" y="150" width="60" height="50" rx="4" fill="#1a0505" opacity="0.5" stroke="#3d0a0a" stroke-width="1"/>
       <rect x="132" y="138" width="12" height="20" rx="2" fill="#1a0505" opacity="0.7"/>
       <rect x="156" y="138" width="12" height="20" rx="2" fill="#1a0505" opacity="0.7"/>
 
+      <!-- Slinsil city outline -->
       <circle cx="620" cy="200" r="35" fill="#0a0a1a" opacity="0.5" stroke="#1a1a3d" stroke-width="1"/>
       <circle cx="620" cy="200" r="20" fill="#0d0d24" opacity="0.6"/>
       <circle cx="620" cy="200" r="6" fill="#1a1a4d" opacity="0.8"/>
+      
+      <!--
+        ROUTE (corrected):
+        Day 1: Kraznir      (155, 180)
+        Day 2: Mountains    (240, 270)
+        Day 3: River Glin   (385, 340)
+        Day 4: Desert       (330, 490)
+        Day 5: Forest       (540, 380)
+        Final: Slinsil      (620, 200)
+      -->
+      <path
 
-        <path
-          d="M 155,180 
-             Q 220,260 240,270 
-             Q 285,285 370,265 
-             Q 380,310 385,340 
-             Q 395,380 400,430 
-             Q 380,460 370,490 
-             Q 420,440 500,420 
-             Q 540,390 560,370 
-             Q 580,340 590,300 
-             Q 610,250 620,210"
+        d="M 155,180 
+         Q 200,240 240,270 
+         Q 300,285 370,265 
+         Q 390,280 380,310 
+         Q 370,340 390,370 
+         Q 410,400 400,430 
+         Q 390,455 360,480 
+         Q 350,490 330,490 
+         Q 430,470 540,380 
+         Q 575,310 600,250 
+         Q 610,225 620,210"
+        
         fill="none"
         stroke="rgba(168,85,247,0.35)"
         stroke-width="2"
@@ -245,42 +187,49 @@
         stroke-dasharray="8 6"
       />
 
+      <!-- Day 1: KRAZNIR -->
       <g class="location-pin" data-location="dungeon" onclick="selectLocation('dungeon')" transform="translate(155,180)">
         <circle r="18" fill="rgba(239,68,68,0.08)" class="pin-glow" opacity="0"/>
         <circle r="8" fill="#ef4444" filter="url(#glow-red)" class="pin-circle"/>
         <text y="24" text-anchor="middle" fill="#c5bfcc" font-family="Cinzel, serif" font-size="9" letter-spacing="1">KRAZNIR</text>
       </g>
 
+      <!-- Day 2: MOUNTAINS -->
       <g class="location-pin" data-location="mountains" onclick="selectLocation('mountains')" transform="translate(240,270)">
         <circle r="18" fill="rgba(168,85,247,0.08)" class="pin-glow" opacity="0"/>
         <circle r="8" fill="#a855f7" filter="url(#glow-purple)" class="pin-circle"/>
         <text y="24" text-anchor="middle" fill="#c5bfcc" font-family="Cinzel, serif" font-size="9" letter-spacing="1">MOUNTAINS</text>
       </g>
 
+      <!-- Day 3: RIVER GLIN -->
       <g class="location-pin" data-location="river" onclick="selectLocation('river')" transform="translate(385,340)">
         <circle r="18" fill="rgba(37,99,235,0.1)" class="pin-glow" opacity="0"/>
         <circle r="8" fill="#3b82f6" filter="url(#glow-purple)" class="pin-circle"/>
         <text y="24" text-anchor="middle" fill="#c5bfcc" font-family="Cinzel, serif" font-size="9" letter-spacing="1">RIVER GLIN</text>
       </g>
 
-      <g class="location-pin" data-location="desert" onclick="selectLocation('desert')" transform="translate(370,490)">
+      <!-- Day 4: DESERT - bottom center, away from Slinsil -->
+      <g class="location-pin" data-location="desert" onclick="selectLocation('desert')" transform="translate(330,490)">
         <circle r="18" fill="rgba(251,191,36,0.08)" class="pin-glow" opacity="0"/>
         <circle r="8" fill="#fbbf24" filter="url(#glow-purple)" class="pin-circle"/>
         <text y="24" text-anchor="middle" fill="#c5bfcc" font-family="Cinzel, serif" font-size="9" letter-spacing="1">STONY DESERT</text>
       </g>
 
-      <g class="location-pin" data-location="forest" onclick="selectLocation('forest')" transform="translate(530,400)">
+      <!-- Day 5: FOREST - right side, closer to Slinsil -->
+      <g class="location-pin" data-location="forest" onclick="selectLocation('forest')" transform="translate(540,380)">
         <circle r="18" fill="rgba(52,211,153,0.08)" class="pin-glow" opacity="0"/>
         <circle r="8" fill="#34d399" filter="url(#glow-purple)" class="pin-circle"/>
         <text y="24" text-anchor="middle" fill="#c5bfcc" font-family="Cinzel, serif" font-size="9" letter-spacing="1">FOREST OF HAAG</text>
       </g>
 
+      <!-- SLINSIL -->
       <g class="location-pin" data-location="slinsil" onclick="selectLocation('slinsil')" transform="translate(620,200)">
         <circle r="22" fill="rgba(168,85,247,0.12)" class="pin-glow" opacity="1"/>
         <circle r="10" fill="#a855f7" filter="url(#glow-purple)" class="pin-circle"/>
         <text y="28" text-anchor="middle" fill="#d4a8ff" font-family="Cinzel, serif" font-size="10" letter-spacing="1" font-weight="600">SLINSIL</text>
       </g>
 
+      <!-- Compass Rose -->
       <g transform="translate(730, 60)" opacity="0.3">
         <line x1="0" y1="-18" x2="0" y2="18" stroke="#a855f7" stroke-width="1"/>
         <line x1="-18" y1="0" x2="18" y2="0" stroke="#a855f7" stroke-width="1"/>
@@ -291,17 +240,20 @@
         <circle r="4" fill="none" stroke="#a855f7" stroke-width="1"/>
       </g>
 
+      <!-- Map Title -->
       <text x="400" y="40" text-anchor="middle" fill="rgba(168,85,247,0.3)" font-family="Cinzel Decorative, serif" font-size="16" letter-spacing="4">NEOVARION</text>
       <line x1="300" y1="48" x2="500" y2="48" stroke="rgba(168,85,247,0.15)" stroke-width="1"/>
 
+      <!-- Day labels -->
       <text x="155" y="163" text-anchor="middle" fill="rgba(239,68,68,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 1</text>
       <text x="240" y="253" text-anchor="middle" fill="rgba(168,85,247,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 2</text>
       <text x="385" y="323" text-anchor="middle" fill="rgba(59,130,246,0.6)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 3</text>
-      <text x="530" y="383" text-anchor="middle" fill="rgba(251,191,36,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 5</text>
-      <text x="370" y="473" text-anchor="middle" fill="rgba(52,211,153,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 4</text>
+      <text x="330" y="473" text-anchor="middle" fill="rgba(251,191,36,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 4</text>
+      <text x="540" y="363" text-anchor="middle" fill="rgba(52,211,153,0.5)" font-family="Cinzel, serif" font-size="8" letter-spacing="1">DAY 5</text>
     </svg>
   </div>
 
+  <!-- INFO PANEL -->
   <div class="info-panel">
     <div class="info-card">
       <div class="info-default" id="info-default">
@@ -315,7 +267,7 @@
         <div class="info-name">The Dungeon of Kraznir</div>
         <div class="info-type">Enemy Territory</div>
         <div class="info-divider"></div>
-        <div class="info-desc">A massive dungeon built above the castle of Krill, king of Kraznir. Inside its walls, the five spies found the battle plans, which they later discover are really the coordinates to collapse NeoVarion's core.</div>
+        <div class="info-desc">A massive dungeon built above the castle of Krill, king of Kraznir. Inside its walls, the five spies found the battle plans, which they later discover are really the coordinates to collapse Eternia's core.</div>
         <div class="info-event">
           <div class="info-event-label">What Happened</div>
           <div class="info-event-text">The spies retrieved the plans but woke the guards escaping. Max turned invisible to move unseen. Touchfire blocked the tunnel with a stone wall. They ran into the dark with everything they came for.</div>
@@ -391,6 +343,7 @@
   </div>
 </div>
 
+<!-- LEGEND -->
 <div class="map-legend">
   <span class="legend-label">Legend</span>
   <div class="legend-item"><div class="legend-dot danger"></div><span class="legend-text">Enemy Territory</span></div>
@@ -399,6 +352,7 @@
   <div class="legend-item"><div class="legend-line"></div><span class="legend-text">Journey Route</span></div>
 </div>
 
+<!-- LOCATION LIST -->
 <div class="location-list">
   <h2>All Locations</h2>
   <span class="list-subtitle">The Journey Across NeoVarion</span>
@@ -412,7 +366,7 @@
   </div>
 </div>
 
-<div class="back-home"><a href="/fivespies.html#locations">← Back to Home</a></div>
+<div class="back-home"><a href="index.html#locations">← Back to Home</a></div>
 
 <script>
   function selectLocation(id) {
@@ -420,7 +374,6 @@
     document.querySelectorAll('.info-content').forEach(el => el.classList.remove('active'));
     const content = document.getElementById('info-' + id);
     if (content) content.classList.add('active');
-
     document.querySelectorAll('.location-pin').forEach(el => el.classList.remove('active'));
     const pin = document.querySelector('[data-location="' + id + '"]');
     if (pin) pin.classList.add('active');
@@ -428,24 +381,12 @@
 
   let lastScroll = 0;
   const nav = document.querySelector("nav");
-
   window.addEventListener("scroll", () => {
     const currentScroll = window.pageYOffset;
-
-    if (currentScroll <= 0) {
-      nav.classList.remove("hide");
-      return;
-    }
-
-    if (currentScroll > lastScroll) {
-      nav.classList.add("hide");
-    } else {
-      nav.classList.remove("hide");
-    }
-
+    if (currentScroll <= 0) { nav.classList.remove("hide"); return; }
+    if (currentScroll > lastScroll) { nav.classList.add("hide"); } else { nav.classList.remove("hide"); }
     lastScroll = currentScroll;
   });
-  
 </script>
 
 </body>
